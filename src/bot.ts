@@ -6,6 +6,7 @@ export const robot = (app: Probot) => {
     async (context) => {
       const body = context.payload.comment.body || '';
       const regex = process.env.REGEX;
+      const name = process.env.NAME;
 
       let conditionValid = true;
       if (regex) {
@@ -37,6 +38,10 @@ export const robot = (app: Probot) => {
         }
 
         if (pullRequest.head.sha !== workflowRun.head_sha) {
+          continue;
+        }
+
+        if (name && workflowRun.name !== name) {
           continue;
         }
 
