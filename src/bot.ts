@@ -8,6 +8,10 @@ export const robot = (app: Probot) => {
       const regex = process.env.REGEX;
       const name = process.env.NAME;
 
+      console.info('body', body);
+      console.info('regex', regex);
+      console.info('name', name);
+
       let conditionValid = true;
       if (regex) {
         conditionValid = new RegExp(regex).exec(body) !== null;
